@@ -1,0 +1,26 @@
+services:
+  crud:
+    image: crud
+    build:
+      context: ./crud
+    container_name: crud3
+    environment:
+      - MYSQL_USER=${CRUD_USER}
+      - MYSQL_PASSWORD=${CRUD_PASS}
+      - MYSQL_DB=${CRUD_DB}
+      - MYSQL_HOST=mariadb  #servicio en la red compartida
+      - FLASK_SECRET_KEY=${FLASK_SECRET_KEY}
+      - SERVIDOR=${SERVIDOR}
+      - PUERTO_MQTTS=${PUERTO_MQTTS}
+      - MQTT_USR=${MQTT_USR}
+      - MQTT_PASS=${MQTT_PASS}
+    ports:
+      - "8000:8000"
+    restart: unless-stopped
+    networks:
+      - mariadb_net 
+
+networks:
+  mariadb_net:
+    external: true 
+    name: docker_iot_default  

@@ -1,0 +1,60 @@
+{% extends "layout.html" %}
+{% block body %}
+
+<div class="row">
+  <div class="col-md-7 mx-auto">
+    <div class="card card-body">
+      <form action="{{url_for('send_command')}}" method="POST">
+        <legend>Enviar comando</legend>
+        <div>
+            <label for="select-id" class="form-label mt-4">Seleccionar Nodo</label>
+            <select class="form-select" id="select-id" name="nodo_id">
+                {% for id in ids %}
+                <option value="{{ id }}">{{ id }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div>
+            <label for="select-command" class="form-label mt-4">Seleccionar Comando</label>
+            <select class="form-select" id="select-command" onchange="mostrarCampo()" name="command">
+                <option>Setpoint</option>
+                <option>Destello</option>
+            </select>
+        </div>
+        <!-- Contenedor para insertar dinámicamente el campo -->
+        <div id="campo-dinamico" class="form-group mt-4"></div>
+        <button type="submit" class="btn btn-primary mt-4">Enviar</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script>
+function mostrarCampo() {
+  const comando = document.getElementById('select-command').value;
+  const contenedor = document.getElementById('campo-dinamico');
+
+  // Limpiar el contenedor
+  contenedor.innerHTML = '';
+
+  if (comando === 'Setpoint') {
+    contenedor.innerHTML = `
+      <div data-mdb-input-init class="form-outline">
+        <input value="25" type="number" min="0" max="99" id="typeNumber" class="form-control" name="setpoint_value" />
+        <label class="form-label" for="typeNumber">Valor de Setpoint</label>
+        </div>
+    `;
+  } else if (comando === 'Destello') {
+    contenedor.innerHTML = `
+      <p>Presiona el botón para enviar la orden destello</p>
+    `;
+  }
+}
+
+// Llamar a la función al cargar la página
+document.addEventListener("DOMContentLoaded", function () {
+  mostrarCampo();
+});
+</script>
+
+{% endblock %}
