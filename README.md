@@ -7,4 +7,5 @@ A esta ruta se ingresa con los métodos *GET* (solamente muestra el formulario) 
 Luego de recibir los datos mediante el método POST se llama a una función que publica por MQTT el valor en el topico "*id_sensor*"/"*comando*", esto se ejecuta dentro de un try-except que dependiendo del resultado crea un "[Flashing With Categories](https://flask.palletsprojects.com/en/stable/patterns/flashing/)" con la categoría "*success*" si se envía correctame y "*error*" en el caso contrario. La publicación se realiza de manera asíncrona pero esto no es necesario debido a que es una tarea bloqueante.
 ## Modificaciones de Navegación
 Se agrega el botón "*Enviar*" en el nav para ir a la pagina que permite publicar y se agrega la opción "*HOME*" para volver a la pagina inicial donde se muestran los contactos, y las opciones de crear, editar y eliminar los mismos.
-
+## Compose
+En el archivo compose, además de pasarle un usuario con los permisos de acceso a ambas bases de datos, se conecta a la misma red en la que están corriendo los demás servicios y de esta manera pueda se pueda acceder a los mismos.
