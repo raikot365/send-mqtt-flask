@@ -1,5 +1,6 @@
 # Envío de Comandos MQTT desde un sitio web utilizando Flask
-
+https://lucasiot.duckdns.org:23410/crud/
+https://lucasiot.duckdns.org:23410/crud/send_command
 ## Templete enviar-comando
 Se agrega un nuevo template a los existentes. En él se muestra un formulario que permite seleccionar el sensor de destino (obtenido desde la base de datos) y los comandos setpoint y destello. Para el primer comando, se muestra un selector numérico para elegir la temperatura, y para el segundo comando, se muestra un texto indicando que solamente hay que presionar el botón de enviar.
 A esta ruta se ingresa con los métodos *GET* (solamente muestra el formulario) y *POST* (donde se envía el formulario).
